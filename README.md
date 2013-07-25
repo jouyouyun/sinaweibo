@@ -1,4 +1,4 @@
-Deepin Desktop
+Deepin Speech Weibo
 ==============
 
 Depends
