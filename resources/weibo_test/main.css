@@ -1,0 +1,71 @@
+#title {
+    position:absolute;
+    top:5px;
+    left:10px;
+    color:green;
+
+    float:left;
+}
+
+#close {
+    position:absolute;
+    top:5px;
+    right:10px;
+    color:red;
+
+    float:right;
+}
+
+#close-button {
+    cursor: pointer;
+}
+
+#weibo-share {
+    cursor: pointer;
+}
+
+#picture {
+    position:absolute;
+    top:35px;
+    left:25px;
+    color:red;
+
+    float:left;
+}
+
+#text {
+    position:absolute;
+    top:535px;
+    left:25px;
+
+    float:left;
+}
+
+#button {
+    position:absolute;
+    bottom:5px;
+    right:30px;
+
+    float:right;
+}
+
+#checkbox {
+    position:absolute;
+    bottom:5px;
+    left:20px;
+
+    float:left;
+}
+
+body {
+    background-color:                   #E0FFFF;
+    height:                             680px;
+    width:                             690px;
+}
+
+textarea {
+    overflow:auto;
+    border:1px solid #E0FFFF;
+    border-color: #E0FFFF;
+    background-color: white;
+}
