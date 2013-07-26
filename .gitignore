@@ -3,13 +3,11 @@ tags
 cscope*
 build
 resources/dominant_color
-resources/common
 *.sw[po]
 *.log
 *~
 *.orig
 core
-lib
 resources/weibo_test/css/smoothness
 
 app/dominant_color
