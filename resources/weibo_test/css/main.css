@@ -3,13 +3,29 @@
     left:10px;
     color:#8e8e8e;
     padding: 12px;
-    width:100%;
     background:red;
 }
 
 #close_button {
     position:absolute;
     float:right;
+}
+
+#board {
+    /*position:fixed;*/
+    bottom: 0px;
+    width: 100%;
+    min-height: 30px;
+    max-height: 30px;
+    z-index: -1000;
+}
+
+#container {
+    /*position:fixed;*/
+    bottom: 0px;
+    display: -webkit-box;
+    min-height: 60px;
+    max-height: 60px;
 }
 
 #weibo-share {
@@ -50,7 +66,8 @@
 }
 
 body {
-    background-color:                   rgb(244,244,244);
+    background-color:                   rgba(244,244,244);
+    background: rgba(0, 0, 0, 0.15);
     height:                             680px;
     width:                             690px;
 }
@@ -60,4 +77,5 @@ textarea {
     border:1px solid #E0FFFF;
     border-color: #E0FFFF;
     background-color: white;
+    resize:none;
 }

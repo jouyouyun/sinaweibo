@@ -111,6 +111,7 @@ class SinaWeibo
 
 sinaHandle = new SinaWeibo()
 
+###
 class WeiboClose extends Widget
     constructor: (@id)->
         super()
@@ -128,6 +129,7 @@ class WeiboClose extends Widget
 
     do_mouseout: (e)=>
         @img.src = "img/cancel_normal.png"
+###
 
 class WeiboShare extends Widget
     #@sinaText: null
@@ -150,7 +152,7 @@ class WeiboShare extends Widget
             return
         sinaHandle.SinaAuth()
 
-new WeiboClose("_add_close")
+#new WeiboClose("_add_close")
 new WeiboShare("_add_share")
 window.addEventListener('load', sinaHandle.SinaParseLoad, false)
 textArea.addEventListener('input', checkLength)
