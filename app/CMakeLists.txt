@@ -1,5 +1,5 @@
 add_subdirectory(weibo_test)
-add_subdirectory(dominant_color)
+#add_subdirectory(dominant_color)
 add_subdirectory(capture_picture)
 
 install(
