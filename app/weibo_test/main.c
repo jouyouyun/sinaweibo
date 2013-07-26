@@ -5,29 +5,50 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 
+#define IMG_PATH    "../resources/weibo_test/img/cap_pic.png"
+gchar *sina_access_token = NULL;
+
 void weibotest_exit()
 {
+    if ( sina_access_token != NULL ) {
+        g_free(sina_access_token);
+        sina_access_token = NULL;
+    }
+
     gtk_main_quit();
 }
 
-void weibotest_SinaUpload(char *access_token, char *msg, char *img_path)
+void weibotest_SaveToken(char *access_token)
+{
+    if ( access_token == NULL ) {
+        g_printerr("argument error in SaveToken...\n");
+        return ;
+    }
+
+    sina_access_token = g_strdup_printf("%s", access_token);
+}
+
+int weibotest_SinaUpload(char *msg)
 {
     gchar *curl_cmd = NULL;
+    /*
     if ( access_token == NULL || img_path == NULL ) {
         g_printerr("arguments error in SinaUpload...\n");
         return ;
     }
+    */
 
-    curl_cmd = g_strdup_printf("curl -k -v -F \"pic=@%s\" -F 'access_token=%s' -F 'status=%s' \"https://upload.api.weibo.com/2/statuses/upload.json\"", img_path, access_token, msg);
+    curl_cmd = g_strdup_printf("curl -k -v -F \"pic=@%s\" -F 'access_token=%s' -F 'status=%s' \"https://upload.api.weibo.com/2/statuses/upload.json\"", IMG_PATH, sina_access_token, msg);
     if ( curl_cmd == NULL ) {
         g_printerr("constructor curl cmd failed...\n");
-        return ;
+        return -1;
     }
     g_printerr("curl cmd : %s\n", curl_cmd);
     system(curl_cmd);
     g_free(curl_cmd);
+    curl_cmd = NULL;
 
-    return ;
+    return 0;
 }
 
 int main(int argc, char **argv)

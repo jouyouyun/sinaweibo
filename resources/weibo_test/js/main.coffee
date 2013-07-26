@@ -1,101 +1,156 @@
-sina_appid = "2376942997"
-sina_secret = "33a1e119d4ffe60359c24ad97c17363e"
-sina_cb_http = "http://127.0.0.1:8000/"
-hostname = "127.0.0.1"
-img_path = "../resources/weibo_test/img/cap_pic.png"
+has_auth = false
+textArea = document.getElementById("text_id")
 
-sina_auth = ->
-    url1 = "https://api.weibo.com/oauth2/authorize?client_id="
-    url2 = "&response_type=code&redirect_uri="
-    auth_url = url1 + sina_appid + url2 + sina_cb_http
+checkLength = (which)->
+    which = event.target
+    maxLength = 140
+    chNum = document.getElementById("chLeft")
+    curLength = maxLength - which.value.length
+
+    if curLength < 0
+        chNum.style.color = "red"
     
-    location.href= auth_url
+    chNum.innerHTML = curLength.toString()
 
-sina_get_code = ->
-    code1 = location.search
-    echo code1
+class SinaWeibo
+    constructor: ->
+        @sinaAppid = "2376942997"
+        @sinaSecret = "33a1e119d4ffe60359c24ad97c17363e"
+        @sinaCallBackHttp = "http://127.0.0.1:8000/"
+        @hostName = "127.0.0.1"
 
-    strs = code1.split("=")
-    echo strs
-    code_len = strs[1].length
-    sina_code = strs[1].slice(0, code_len - 1)
-    return sina_code
+    SinaAuth: ->
+        url1 = "https://api.weibo.com/oauth2/authorize?client_id="
+        url2 = "&response_type=code&redirect_uri="
+        url = url1 + @sinaAppid + url2 + @sinaCallBackHttp
+        echo "Auth url: " + url
 
-sina_get_token = ->
-    code = sina_get_code()
-    get_token_xhr = new XMLHttpRequest()
-    get_token_url = "https://api.weibo.com/oauth2/access_token?client_id="+sina_appid+"&client_secret="+sina_secret+"&grant_type=authorization_code&code="+code+"&redirect_uri="+sina_cb_http
-    
-    echo get_token_url
-    get_token_xhr.open("POST", get_token_url, false)
-    get_token_xhr.send(null)
-    response = get_token_xhr.responseText
-    get_token_xhr = null
-    echo response
+        location.href= url
 
-    echo response.length
-    if response.length == 117
-        json_obj = JSON.parse(response)
-        #echo response.slice(17, 49)
-        echo "access_token: " + json_obj.access_token
-        sina_access_token = json_obj.access_token
-        echo sina_get_username(sina_access_token)
-        DCore.WeiboTest.SinaUpload(sina_access_token, "Test XMLHttpRequest", img_path)
+    SinaGetCode: ->
+        code1 = location.search
+        strs = code1.split("=")
+        code_len = strs[1].length
+        code = strs[1].slice(0, code_len - 1)
+        echo "Code: " + code
 
-sina_parse_onload = ->
-    hostdest = location.hostname
+        return code
 
-    echo hostdest
-    if hostdest in [hostname]
-        sina_get_token()
+    SinaGetToken: ->
+        url1 = "https://api.weibo.com/oauth2/access_token?client_id="
+        url2 = "&client_secret="
+        url3 = "&grant_type=authorization_code&code="
+        url4 = "&redirect_uri="
+        code = @SinaGetCode()
+        url = url1 + @sinaAppid + url2 + @sinaSecret + url3 + code + url4 + @sinaCallBackHttp
 
-sina_get_username = (access_token)->
-    id_xhr = new XMLHttpRequest()
-    id_url = "https://api.weibo.com/2/account/get_uid.json?&access_token="+access_token
-    echo "id: "+id_url
+        echo "Token url: " + url
+        xhr = new XMLHttpRequest()
+        xhr.open("POST", url, false)
+        xhr.send(null)
+        response = xhr.responseText
+        xhr = null
 
-    id_xhr.open("GET", id_url, false)
-    id_xhr.send(null)
-    response = id_xhr.responseText
-    json_obj = JSON.parse(response)
-    sina_uid = json_obj.uid
-    echo sina_uid
-    id_xhr = null
+        echo response
+        if response.length == 117
+            has_auth = true
+            jsonObj = JSON.parse(response)
+            @sinaAccessToken = jsonObj.access_token
+            
+            echo "Token: " + @sinaAccessToken
+            DCore.WeiboTest.SaveToken(@sinaAccessToken)
+            @SinaGetUid()
+            echo "textarea: "+WeiboShare.sinaText
+            DCore.WeiboTest.SinaUpload(WeiboShare.sinaText)
+            return @sinaAccessToken
+        else
+            return null
 
-    id_xhr = new XMLHttpRequest()
-    id_url = "https://api.weibo.com/2/users/show.json?&access_token="+access_token+"&uid="+sina_uid
-    echo "show: "+id_url
+    SinaGetUid: ()->
+        url1 = "https://api.weibo.com/2/account/get_uid.json?&access_token="
+        url = url1 + @sinaAccessToken
+        xhr = new XMLHttpRequest()
 
-    id_xhr.open("GET", id_url, false)
-    id_xhr.send(null)
-    response = id_xhr.responseText
-    id_xhr = null
-    json_obj = JSON.parse(response)
-    sina_username = json_obj.screen_name
-    return sina_username
+        echo "Uid url: " + url
+        xhr.open("GET", url, false)
+        xhr.send(null)
+        response = xhr.responseText
+        xhr = null
 
-class WeiboTest extends Widget
+        jsonObj = JSON.parse(response)
+        sinaUid = jsonObj.uid
+        echo "Uid: " + sinaUid
+        return sinaUid
+
+    SinaGetUserName: (@token, @uid)->
+        xhr = new XMLHttpRequest()
+        url1 = "https://api.weibo.com/2/users/show.json?&access_token="
+        url = url1 + @token + "&uid=" + uid
+
+        echo "UserName url: " + url
+        xhr.open("GET", url, false)
+        xhr.send(null)
+        response = xhr.responseText
+        xhr = null
+
+        jsonObj = JSON.parse(response)
+        sinaUserName = jsonObj.screen_name
+        echo "UserName: " + sinaUserName
+        return sinaUserName
+
+    SinaParseLoad: =>
+        hostdest = location.hostname
+
+        echo "dest: " + hostdest
+        search = location.search
+        echo "search: " + search
+        if search == null
+            return
+        if hostdest == @hostName
+            @SinaGetToken()
+
+sinaHandle = new SinaWeibo()
+
+class WeiboClose extends Widget
     constructor: (@id)->
         super()
-        echo "3333"
-        @element.innerText = "X"
-        $("#close").appendChild(@element)
+        @img = create_img('', 'img/cancel_normal.png', @element)
+        $("#title-pos").appendChild(@element)
 
-    do_click: (e)->
-        echo "exit weibo..."
+    do_click: (e)=>
         DCore.WeiboTest.exit()
 
-class WeiboShare extends Widget
-    constructor: (@id)->
-        super
-        echo "567898"
-        @element.innerText = "Share"
-        $("#button").appendChild(@element)
-        
-    do_click: (e)->
-        echo "sina authorize..."
-        sina_auth()
+    do_mousedown: (e)=>
+        @img.src = "img/cancel_press.png"
 
-new WeiboTest("_add_close_button")
-new WeiboShare("_add_share_button")
-window.addEventListener('load', sina_parse_onload, false)
+    do_mouseover: (e)=>
+        @img.src = 'img/cancel_hover.png'
+
+    do_mouseout: (e)=>
+        @img.src = "img/cancel_normal.png"
+
+class WeiboShare extends Widget
+    #@sinaText: null
+    constructor: (@id)->
+        super()
+        #@input = document.createElement('input')
+        #@input.type = 'button'
+        #@input.value = "Share"
+        #$("#button-pos").appendChild(@input)
+        @element.innerText = "Share"
+        $("#button-pos").appendChild(@element)
+
+    do_click: (e)=>
+        echo "Share button clicked"
+        echo "click textArea: " + textArea.value
+        #location.
+        #WeiboShare.sinaText = textArea.value
+        if has_auth
+            DCore.WeiboTest.SinaUpload(WeiboShare.sinaText)
+            return
+        sinaHandle.SinaAuth()
+
+new WeiboClose("_add_close")
+new WeiboShare("_add_share")
+window.addEventListener('load', sinaHandle.SinaParseLoad, false)
+textArea.addEventListener('input', checkLength)

@@ -1,33 +1,45 @@
 <html>
     <head>
-        <meta http-equiv="Access-Control-Allow-Origin" content="*" charset="utf-8" />
-        <title>Test XMLHttpRequest</title>
-    </head>
-    <body>
-        <p>Test XMLHttpRequest POST</p>
-
+        <meta charset="utf-8" />
+        <title>Test TextArea</title>
         <script type="text/javascript">
-            res = {"access_token":"2.00VkxpGCR96raC7fa0d660e00_J7zC","remind_in":"157679999","expires_in":157679999,"uid":"1933308087"};
+            function checktext(text) {
+                allValid = true;
 
-            alert(res.access_token);
+                for ( i = 0; i < text.length; i++ ) {
+                    if ( text.charAt(i) != " " ) {
+                        allValid = false;
+                        break;
+                    }
+                }
 
-            var xhr = new XMLHttpRequest();
-            var code = "90fd2707abe9ba9db96123d233c06e5a";
-            var url = "https://api.weibo.com/oauth2/access_token";
-            var params = "client_id=2376942997&client_secret=33a1e119d4ffe60359c24ad97c17363e&grant_type=authorization_code&code="+code+"&redirect_uri=http://127.0.0.1:8000/";
+                return allValid;
+            }
 
-            alert("Starting POST Request");
-            document.writeln(url);
-            document.writeln(params);
-            xhr.onreadystatechange = function() {
-                if ( xhr.readyState == 4 && xhr.status == 200 ) {
-                    response = xhr.responseText;
-                    alert(response);
+            function gcount(message, total, used, remain) {
+                var max;
+
+                max = total.value;
+                if ( message.value.length > max ) {
+                    message.value = message.value.substring(0, max);
+                    used.value = max;
+                    remain.value = 0;
+                    alert("The text > 200 chars");
+                } else {
+                    used.value = message.value.length;
+                    remain.value = max - used.value;
                 }
             }
-            
-            xhr.open("POST", url, true);
-            xhr.send(params);
         </script>
+    </head>
+    <body>
+        <form onsubmit="return datacheck();">
+            <fieldset>
+                <textarea id="textid" name="texts" rows="10" cols="75" onkeydown="gcount(this.form.texts, this.form.total, this.form.used, this.form.remain);" onkeyup="gcount(this.form.texts, this.form.total, this.form.used, this.form.remain);"></textarea>
+                <input disabled maxlength="4" name="total" size="3" value="140" class="inputtext" />
+                <input disabled maxlength="4" name="used" size="3" value="0" class="inputtext" />
+                <input disabled maxlength="4" name="remain" size="3" value="140" class="inputtext" />
+            </fieldset>
+        </form>
     </body>
 </html>

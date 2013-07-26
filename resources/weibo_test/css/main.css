@@ -1,114 +1,63 @@
-#slider {
-    margin: 10px;
+#title-pos {
+    position:absolute;
+    left:10px;
+    color:#8e8e8e;
+    padding: 12px;
+    width:100%;
+    background:red;
 }
 
-.color_board {
-    width: 50px;
-    height: 50px;
-    background: red;
+#close_button {
+    position:absolute;
+    float:right;
 }
 
-.entry {
-    min-width: 100px;
-    margin-bottom: 5px;
+#weibo-share {
+    cursor: pointer;
 }
 
-#c_s {
-    margin-bottom: 15px;
+#picture-pos {
+    position:absolute;
+    top:35px;
+    left:25px;
+    color:red;
+
+    float:left;
 }
 
-#c_b {
-    margin-bottom: 15px;
+#text-pos {
+    position:absolute;
+    top:535px;
+    left:25px;
+
+    float:left;
 }
 
-#show {
-    margin-top:40px;
-    -webkit-box-flex: 1;
-}
-.ShowContainer {
-    display: -webkit-box;
-}
-.ShowItem {
-    /*background: red;*/
-    margin: 5px;
-    width: 80px;
-    height: 80px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-}
-.ShowItem img {
-    max-width: 48px;
-    max-height: 48px;
-}
-.ColorInfo {
-    font-size: 10px;
-    /*background: red;*/
-    min-width: 65px;
-    color: white;
-    height: 20px;
+#button-pos {
+    position:absolute;
+    bottom:5px;
+    right:30px;
+
+    float:right;
 }
 
+#checkbox-pos {
+    position:absolute;
+    bottom:5px;
+    left:20px;
 
-#config {
-    width: 200px;
-    padding: 15px;
-    border-left: 1px dashed black;
-}
-
-#main {
-    display: -webkit-box;
-    -webkit-box-flex: 1;
-}
-
-#icon_show {
-    background: blue;
-    height: 80px;
-}
-
-#title {
-    position: fixed;
-}
-#title span {
-    text-align: center;
-    width: 80px;
-    display: inline-block;
+    float:left;
 }
 
 body {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-
-    width: 600px;
-    height: 450px;
-    background: rgba(50, 100, 80, 0.8);
-    padding: 0px;
-    margin: 0px;
+    background-color:                   rgb(244,244,244);
+    height:                             680px;
+    width:                             690px;
 }
 
-.close:hover {
-    background: rgba(100, 0, 0, 0.5);
-}
-.close {
-    cursor: default;
-    padding: 5px;
-    margin-top: 10px;
-    text-align:center;
-    height: 1em;
-    width: 1em;
-    color: red;
-}
-
-.DragZone{
-    background-size: 80px 80px;
-    background-repeat: no-repeat;
-    background-clip: content-box;
-    text-align: center;
-    border: 1px dashed white;
-    width: 80px;
-    height: 80px;
-    margin: 10px;
-}
-
-.AddMask {
-    float: left;
+textarea {
+    overflow:auto;
+    border:1px solid #E0FFFF;
+    border-color: #E0FFFF;
+    background-color: white;
 }
