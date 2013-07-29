@@ -42,12 +42,11 @@ void weibotest_SaveMsg(char *msg)
 int weibotest_SinaUpload()
 {
     gchar *curl_cmd = NULL;
-    /*
-    if ( access_token == NULL || img_path == NULL ) {
+
+    if ( sina_access_token == NULL || sina_msg == NULL ) {
         g_printerr("arguments error in SinaUpload...\n");
-        return ;
+        return -1;
     }
-    */
 
     curl_cmd = g_strdup_printf("curl -k -v -F \"pic=@%s\" -F 'access_token=%s' -F 'status=%s' \"https://upload.api.weibo.com/2/statuses/upload.json\"", IMG_PATH, sina_access_token, sina_msg);
     if ( curl_cmd == NULL ) {

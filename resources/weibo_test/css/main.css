@@ -1,17 +1,131 @@
+/*@import url("../../common/css/global.css")*/
+
 body {
-    background-color:                   rgba(244,244,244, 0.5);
+    background-color:                   rgba(244,244,244, 0);
     height:                             680px;
     width:                             690px;
     padding:12px;
+    -webkit-user-select: none;
 }
 
-.shadow {
-    box-shadow: 0 0 10px gray;
+.container {
+    position:fixed;
+    background-color:                   rgb(244,244,244);
+    /*display: -webkit-box;*/
+    top: 10px;
+    bottom: 45px;
+    box-shadow:inset 0 0 1px 1px gray;
+    -webkit-box-shadow:inset 0 0 1px 1px gray;
+    -moz-box-shadow:inset 0 0 1px 1px gray;
+    border-radius:5px;
+}
+
+.margin_img {
+    /*box-shadow: 0 0 10px gray;
     -webkit-box-shadow:0 0 10px gray;
-    -moz-box-shadow:0 0 10px gray;
-    margin-top: 10px;
+    -moz-box-shadow:0 0 10px gray;*/
+    margin-top: 5px;
     margin-left:25px;
     margin-right:25px;
+}
+
+.shadow_text {
+    box-shadow:inset 0 0 5px #c4c4c4;
+    margin-top: 15px;
+    margin-left:25px;
+    margin-right:25px;
+}
+
+.shadow_buttom {
+    /*box-shadow:inset 0 0 1px 1px gray;
+    -webkit-box-shadow:inset 0 0 1px 1px gray;
+    -moz-box-shadow:inset 0 0 1px 1px gray;*/
+    margin-top: 12px;
+    margin-left:20px;
+    margin-right:25px;
+}
+
+.title_pos {
+    position:relative;
+    color:#8e8e8e;
+    width:690px;
+    height:22px;
+    margin-top:12px;
+}
+
+.button_close {
+    position:relative;
+    float:right;
+    width:21px;
+    height:16px;
+    margin-right: 10px;
+    background: url("../img/cancel_normal.png");
+}
+
+.button_close:hover {
+    position:relative;
+    float:right;
+    width:21px;
+    height:16px;
+    margin-right: 10px;
+    background: url("../img/cancel_hover.png");
+}
+
+.button_close:active {
+    position:relative;
+    float:right;
+    width:21px;
+    height:16px;
+    margin-right: 10px;
+    background: url("../img/cancel_press.png");
+}
+
+.input_triangle {
+    position:absolute;
+    width:18px;
+    height:10px;
+    margin-left: 20px;
+    margin-top: -8px;
+    background: url("../img/input_triangle.png");
+}
+
+textarea {
+    overflow:auto;
+    border:1px solid rgba(224,224,255,0);
+    border-color: rgba(224,224,255,0);
+    background-color: white;
+    /*margin-top: 10px;
+    margin-left:25px;*/
+    resize:none;
+    outline: none;
+}
+
+.number {
+    color:#94a9c8;
+    margin-right:10px;
+    float:right;
+    font-size:190%;
+}
+
+/* button share */  
+.button_share {
+    position:relative;
+    width:94px;
+    height:34px;
+    float:right;
+    background: url("../img/share_normal.png");
+}
+
+.button_share:hover {
+    position:relative;
+    float:right;
+    background: url("../img/share_hover.png");
+}
+
+.button_share:active {
+    position:relative;
+    float:right;
+    background: url("../img/share_press.png");
 }
 
 .shadow1 {
@@ -22,91 +136,4 @@ body {
     margin-bottom: 10px;
     margin-left:10px;
     margin-right:10px;
-}
-
-.shadow2 {
-    box-shadow:inset 0 0 1px 1px gray;
-    -webkit-box-shadow:inset 0 0 1px 1px gray;
-    -moz-box-shadow:inset 0 0 1px 1px gray;
-    margin-top: 10px;
-    margin-left:25px;
-    margin-right:25px;
-}
-
-.shadow3 {
-    /*box-shadow:inset 0 0 1px 1px gray;
-    -webkit-box-shadow:inset 0 0 1px 1px gray;
-    -moz-box-shadow:inset 0 0 1px 1px gray;*/
-    margin-top: 20px;
-    margin-left:20px;
-    margin-right:25px;
-}
-
-.container {
-    position:fixed;
-    bottom: 10px;
-    /*display: -webkit-box;*/
-    top: 10px;
-}
-
-.titlepos {
-    position:relative;
-    color:#8e8e8e;
-    width:690px;
-    height:22px;
-}
-
-#title-pos {
-    position:relative;
-    color:#8e8e8e;
-    width:690px;
-    height:22px;
-}
-
-#close_button {
-    position:relative;
-    float:right;
-    width:21px;
-    height:16px;
-    background: url("../img/cancel_normal.png");
-}
-
-#close_button:hover {
-    background: url("../img/cancel_hoverl.png");
-}
-
-#close_button:press {
-    background: url("../img/cancel_press.png");
-}
-
-img {
-    /*margin-top: 10px;
-    margin-left:25px;*/
-}
-
-textarea {
-    overflow:auto;
-    border:1px solid #E0FFFF;
-    border-color: #E0FFFF;
-    background-color: white;
-    /*margin-top: 10px;
-    margin-left:25px;*/
-    resize:none;
-}
-
-#button-pos {
-    /*background: rgba(0, 0, 100, 0.3);*/
-    position:absolute;
-    bottom:5px;
-    right:25px;
-
-    float:right;
-}
-
-#checkbox-pos {
-    position:absolute;
-    bottom:5px;
-    left:20px;
-
-    float:left;
 }

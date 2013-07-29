@@ -1,5 +1,10 @@
 has_auth = false
 textArea = document.getElementById("text_id")
+closeButton = document.getElementById("close_id")
+sinaPicAuth = document.getElementById("sina_pic_id")
+shareButton = document.getElementById("share_id")
+sinaCheckBox = document.getElementById("sinaCheckId")
+bodyContainer = document.getElementById("containerId")
 
 checkLength = (which)->
     which = event.target
@@ -9,6 +14,8 @@ checkLength = (which)->
 
     if curLength < 0
         chNum.style.color = "red"
+    else
+        chNum.style.color = "#94a9c8"
     
     chNum.innerHTML = curLength.toString()
 
@@ -54,13 +61,16 @@ class SinaWeibo
         echo response
         if response.length == 117
             has_auth = true
+            sinaPicAuth.src = "../img/Sina.png"
+
             jsonObj = JSON.parse(response)
             @sinaAccessToken = jsonObj.access_token
             
             echo "Token: " + @sinaAccessToken
             DCore.WeiboTest.SaveToken(@sinaAccessToken)
-            @SinaGetUid()
-            DCore.WeiboTest.SinaUpload()
+            @sinaUserName = @SinaGetUserName(@sinaAccessToken, @SinaGetUid())
+            #new SinaUserLabel()
+            sinaPicAuth.value = @sinaUserName
             return @sinaAccessToken
         else
             return null
@@ -110,48 +120,37 @@ class SinaWeibo
 
 sinaHandle = new SinaWeibo()
 
-###
-class WeiboClose extends Widget
-    constructor: (@id)->
-        super()
-        @img = create_img('', 'img/cancel_normal.png', @element)
-        $("#title-pos").appendChild(@element)
+WeiboExit = =>
+    DCore.WeiboTest.exit()
 
-    do_click: (e)=>
-        DCore.WeiboTest.exit()
-
-    do_mousedown: (e)=>
-        @img.src = "img/cancel_press.png"
-
-    do_mouseover: (e)=>
-        @img.src = 'img/cancel_hover.png'
-
-    do_mouseout: (e)=>
-        @img.src = "img/cancel_normal.png"
-###
-
-class WeiboShare extends Widget
-    #@sinaText: null
-    constructor: (@id)->
-        super()
-        #@input = document.createElement('input')
-        #@input.type = 'button'
-        #@input.value = "Share"
-        #$("#button-pos").appendChild(@input)
-        @element.innerText = "Share"
-        $("#button-pos").appendChild(@element)
-
-    do_click: (e)=>
-        echo "Share button clicked"
-        echo "click textArea: " + textArea.value
-        sinaText = textArea.value
-        DCore.WeiboTest.SaveMsg(sinaText)
-        if has_auth
-            DCore.WeiboTest.SinaUpload()
-            return
+WeiboLogin = =>
+    if !has_auth
         sinaHandle.SinaAuth()
+        #sinaHandle.SinaGetToken()
 
-#new WeiboClose("_add_close")
-#new WeiboShare("_add_share")
+WeiboPublish = =>
+    if has_auth
+        if !sinaCheckBox.checked
+            alert("请选择需要发送的微博")
+            return
+        else if textArea.value.length < 1
+            alert("请输入发送内容")
+            return
+        else
+            DCore.WeiboTest.SaveMsg(textArea.value)
+            DCore.WeiboTest.SinaUpload()
+            textArea.value = ""
+            return
+
+class SinaUserLabel extends Widget
+    constructor: (@id)->
+        super()
+        echo "UserName: " + sinaHandle.sinaUserName
+        @element.innerText = sinaHandle.sinaUserName
+        $("#sina_button").appendChild(@element)
+
 window.addEventListener('load', sinaHandle.SinaParseLoad, false)
 textArea.addEventListener('input', checkLength)
+sinaPicAuth.addEventListener('click', WeiboLogin)
+closeButton.addEventListener('click', WeiboExit)
+shareButton.addEventListener('click', WeiboPublish)
