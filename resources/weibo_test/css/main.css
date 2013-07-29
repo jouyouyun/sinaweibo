@@ -1,22 +1,19 @@
 /*@import url("../../common/css/global.css")*/
 
 body {
-    background-color:                   rgba(244,244,244, 0);
-    height:                             680px;
-    width:                             690px;
+    background-color:rgba(244,244,244, 0);
+    height:680px;
+    width:690px;
     padding:12px;
     -webkit-user-select: none;
 }
 
 .container {
     position:fixed;
-    background-color:                   rgb(244,244,244);
-    /*display: -webkit-box;*/
+    background-color:rgb(244,244,244);
     top: 10px;
     bottom: 45px;
     box-shadow:inset 0 0 1px 1px gray;
-    -webkit-box-shadow:inset 0 0 1px 1px gray;
-    -moz-box-shadow:inset 0 0 1px 1px gray;
     border-radius:5px;
 }
 
@@ -27,19 +24,18 @@ body {
     margin-top: 5px;
     margin-left:25px;
     margin-right:25px;
+    height:440px;
+    width:645px; 
 }
 
-.shadow_text {
+.textArea {
     box-shadow:inset 0 0 5px #c4c4c4;
     margin-top: 15px;
     margin-left:25px;
     margin-right:25px;
 }
 
-.shadow_buttom {
-    /*box-shadow:inset 0 0 1px 1px gray;
-    -webkit-box-shadow:inset 0 0 1px 1px gray;
-    -moz-box-shadow:inset 0 0 1px 1px gray;*/
+.widget_bottom {
     margin-top: 12px;
     margin-left:20px;
     margin-right:25px;
