@@ -3,41 +3,44 @@
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/main.css" />
     </head>
-    <body>
-        <canvas id="board"></canvas>
-        <div id="container">
-        <div id="title-pos">
-            <div>发送到微博</div>
-            <div id="close_button"></div>
-        </div>
+    <body class="shadow1">
+        <div class="container">
+            <div class="titlepos" style="margin-top:12px">
+                <span>发送到微博</span>
+                <div id="close_button"></div>
+            </div>
 
-        <div id="close-pos">
-        </div>
-        
-        <div id="picture-pos">
-            <img src="img/cap_pic.png" height="480" width="640" />
-        </div>
-        
-        <div id="text-pos">
-            <textarea id="text_id" name="texts" rows="6" cols="78"></textarea>
-        </div>
+            <div class="shadow">
+                <img src="img/cap_pic.png" height="480" width="640" />
+            </div>
 
-        <div id="checkbox-pos">
-            <input type="checkbox" checked="true" name="weibo" value="Sina" />
-            <img src="img/Sina.png" />
+            <div class="shadow2">
+                <textarea id="text_id" name="texts" rows="6" cols="78"></textarea>
+            </div>
+
+            <div class="shadow3">
+                <input type="checkbox" checked="true" name="Sina" value="Sina" />
+                <img src="img/Sina.png" />
+                <input type="checkbox" name="Tencent" value="Tencent" />
+                <img src="img/Tencent.png" />
+
+                <input type="button" id="share_id" value="Share" style="float:right" />
+                <span id="chLeft" style="vga(); margin-right:30px; margin-top: 5px; float:right">140</span>
+            </div>
+
             <!--
-            <input type="checkbox" name="weibo" value="Tencent" />
-            <img src="img/Tencent.png" />
-            -->
-        </div>
+            <div id="checkbox-pos">
+                <input type="checkbox" checked="true" name="weibo" value="Sina" />
+                <img src="img/Sina.png" />
+                <input type="checkbox" name="weibo" value="Tencent" />
+                <img src="img/Tencent.png" />
+             </div>
 
-        <div id="button-pos">
-            <span id="chLeft" style="color:gray;margin-right: 20px;">140</span>
+            <div id="button-pos">
+                <span id="chLeft" style="color:gray; margin-right:20px">140</span>
+                <input type="button" id="share_id" value="Share" />
+            </div>
+        -->
         </div>
-        </div>
-
-        <script src="js/jquery-1.8.3.js"></script>
-        <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
-        <script src="js/main.js"></script>
     </body>
 </html>

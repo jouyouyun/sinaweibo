@@ -60,8 +60,7 @@ class SinaWeibo
             echo "Token: " + @sinaAccessToken
             DCore.WeiboTest.SaveToken(@sinaAccessToken)
             @SinaGetUid()
-            echo "textarea: "+WeiboShare.sinaText
-            DCore.WeiboTest.SinaUpload(WeiboShare.sinaText)
+            DCore.WeiboTest.SinaUpload()
             return @sinaAccessToken
         else
             return null
@@ -145,14 +144,14 @@ class WeiboShare extends Widget
     do_click: (e)=>
         echo "Share button clicked"
         echo "click textArea: " + textArea.value
-        #location.
-        #WeiboShare.sinaText = textArea.value
+        sinaText = textArea.value
+        DCore.WeiboTest.SaveMsg(sinaText)
         if has_auth
-            DCore.WeiboTest.SinaUpload(WeiboShare.sinaText)
+            DCore.WeiboTest.SinaUpload()
             return
         sinaHandle.SinaAuth()
 
 #new WeiboClose("_add_close")
-new WeiboShare("_add_share")
+#new WeiboShare("_add_share")
 window.addEventListener('load', sinaHandle.SinaParseLoad, false)
 textArea.addEventListener('input', checkLength)

@@ -2,7 +2,7 @@ SET(NAME "weibo_test")
 
 GEN_JSC_SOURCE(JSC_GEN "jsc")
 
-SET(SRC_LIST main.c ${JSC_GEN})
+SET(SRC_LIST main.c weibo.c ${JSC_GEN})
 
 add_executable(${NAME} ${SRC_LIST})
 

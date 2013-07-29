@@ -1,0 +1,106 @@
+#title-pos {
+    position:relative;
+    color:#8e8e8e;
+    width:690px;
+    height:22px;
+}
+
+#close_button {
+    float:right;
+    width:21px;
+    height:16px;
+    background: url("../img/cancel_normal.png");
+}
+
+#close_button:hover {
+    background: url("../img/cancel_hoverl.png");
+}
+
+#close_button:press {
+    background: url("../img/cancel_press.png");
+}
+
+#board {
+    /*position:fixed;*/
+    bottom: 0px;
+    width: 100%;
+    min-height: 12px;
+    max-height: 12px;
+    z-index: -1000;
+}
+
+#container {
+    position:fixed;
+    bottom: 10px;
+    /*display: -webkit-box;*/
+    top: 10px;
+}
+
+#weibo-share {
+    cursor: pointer;
+}
+
+#picture-pos {
+    position:absolute;
+    left:25px;
+    margin-top:10px;
+    box-shadow: 0 0 10px gray;
+    /*background: rgba(100, 0, 0, 0.3);*/
+}
+
+#text-pos {
+    background: rgba(100, 0, 0, 0.3);
+    position:absolute;
+    top:535px;
+    left:25px;
+
+    /*float:left;*/
+}
+
+#button-pos {
+    background: rgba(0, 0, 100, 0.3);
+    position:absolute;
+    bottom:5px;
+    right:30px;
+
+    float:right;
+}
+
+#checkbox-pos {
+    position:absolute;
+    bottom:5px;
+    left:20px;
+
+    float:left;
+}
+
+body {
+    background-color:                   rgb(244,244,244);
+    height:                             680px;
+    width:                             690px;
+    padding:12px;
+}
+.shadow1 {
+    box-shadow: 0 0 10px gray;
+    /*-moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:1px;
+    border:1px solid ddd;
+    -webkit-box-shadow:0 0 10px gray;
+    -moz-box-shadow:0 0 10px gray;*/
+}
+
+.shadow2 {
+    /* 横向偏移3像素，纵向偏移3像素，模糊4像素，颜色为纯黑 */
+    -moz-box-shadow:3px 3px 4px block;
+    -webkit-box-shadow:3px 3px 4px block;
+    box-shadow:3px 3px 4px block;
+}
+
+textarea {
+    overflow:auto;
+    border:1px solid #E0FFFF;
+    border-color: #E0FFFF;
+    background-color: white;
+    resize:none;
+}

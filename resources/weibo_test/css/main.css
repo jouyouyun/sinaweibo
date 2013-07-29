@@ -1,58 +1,104 @@
-#title-pos {
-    position:absolute;
-    left:10px;
+body {
+    background-color:                   rgba(244,244,244, 0.5);
+    height:                             680px;
+    width:                             690px;
+    padding:12px;
+}
+
+.shadow {
+    box-shadow: 0 0 10px gray;
+    -webkit-box-shadow:0 0 10px gray;
+    -moz-box-shadow:0 0 10px gray;
+    margin-top: 10px;
+    margin-left:25px;
+    margin-right:25px;
+}
+
+.shadow1 {
+    box-shadow:inset 0 0 1px 1px red;
+    -webkit-box-shadow:inset 0 0 1px 1px red;
+    -moz-box-shadow:inset 0 0 1px 1px red;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.shadow2 {
+    box-shadow:inset 0 0 1px 1px gray;
+    -webkit-box-shadow:inset 0 0 1px 1px gray;
+    -moz-box-shadow:inset 0 0 1px 1px gray;
+    margin-top: 10px;
+    margin-left:25px;
+    margin-right:25px;
+}
+
+.shadow3 {
+    /*box-shadow:inset 0 0 1px 1px gray;
+    -webkit-box-shadow:inset 0 0 1px 1px gray;
+    -moz-box-shadow:inset 0 0 1px 1px gray;*/
+    margin-top: 20px;
+    margin-left:20px;
+    margin-right:25px;
+}
+
+.container {
+    position:fixed;
+    bottom: 10px;
+    /*display: -webkit-box;*/
+    top: 10px;
+}
+
+.titlepos {
+    position:relative;
     color:#8e8e8e;
-    padding: 12px;
-    background:red;
+    width:690px;
+    height:22px;
+}
+
+#title-pos {
+    position:relative;
+    color:#8e8e8e;
+    width:690px;
+    height:22px;
 }
 
 #close_button {
-    position:absolute;
+    position:relative;
     float:right;
+    width:21px;
+    height:16px;
+    background: url("../img/cancel_normal.png");
 }
 
-#board {
-    /*position:fixed;*/
-    bottom: 0px;
-    width: 100%;
-    min-height: 30px;
-    max-height: 30px;
-    z-index: -1000;
+#close_button:hover {
+    background: url("../img/cancel_hoverl.png");
 }
 
-#container {
-    /*position:fixed;*/
-    bottom: 0px;
-    display: -webkit-box;
-    min-height: 60px;
-    max-height: 60px;
+#close_button:press {
+    background: url("../img/cancel_press.png");
 }
 
-#weibo-share {
-    cursor: pointer;
+img {
+    /*margin-top: 10px;
+    margin-left:25px;*/
 }
 
-#picture-pos {
-    position:absolute;
-    top:35px;
-    left:25px;
-    color:red;
-
-    float:left;
-}
-
-#text-pos {
-    position:absolute;
-    top:535px;
-    left:25px;
-
-    float:left;
+textarea {
+    overflow:auto;
+    border:1px solid #E0FFFF;
+    border-color: #E0FFFF;
+    background-color: white;
+    /*margin-top: 10px;
+    margin-left:25px;*/
+    resize:none;
 }
 
 #button-pos {
+    /*background: rgba(0, 0, 100, 0.3);*/
     position:absolute;
     bottom:5px;
-    right:30px;
+    right:25px;
 
     float:right;
 }
@@ -63,19 +109,4 @@
     left:20px;
 
     float:left;
-}
-
-body {
-    background-color:                   rgba(244,244,244);
-    background: rgba(0, 0, 0, 0.15);
-    height:                             680px;
-    width:                             690px;
-}
-
-textarea {
-    overflow:auto;
-    border:1px solid #E0FFFF;
-    border-color: #E0FFFF;
-    background-color: white;
-    resize:none;
 }
