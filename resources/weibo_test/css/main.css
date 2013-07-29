@@ -18,9 +18,7 @@ body {
 }
 
 .margin_img {
-    /*box-shadow: 0 0 10px gray;
-    -webkit-box-shadow:0 0 10px gray;
-    -moz-box-shadow:0 0 10px gray;*/
+    /*box-shadow: 0 0 10px gray;*/
     margin-top: 5px;
     margin-left:25px;
     margin-right:25px;

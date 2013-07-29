@@ -4,6 +4,27 @@
 #include "i18n.h"
 #include "weibo.h"
 
+GtkWidget *container = NULL;
+
+void weibotest_MoveWindow(char *ax, char *ay)
+{
+    int x = 0;
+    int y = 0;
+
+    if ( ax == NULL || ay == NULL ) {
+        g_printerr("x y NULL\n");
+        return ;
+    }
+
+    x = atoi(ax);
+    y = atoi(ay);
+    g_printerr("\n-------------Move window to x: %d y: %d\n\n", x, y);
+    if ( (x >= 1366 || x <= 0) || (y <=0 || y >= 768) ) {
+        return ;
+    }
+    gtk_window_move(GTK_WINDOW(container), x, y);
+}
+
 int main(int argc, char **argv)
 {
     init_i18n();
@@ -12,7 +33,7 @@ int main(int argc, char **argv)
     sina_access_token = NULL;
     sina_msg = NULL;
 
-    GtkWidget *container = create_web_container(TRUE, TRUE);
+    container = create_web_container(TRUE, TRUE);
     GtkWidget *webview = d_webview_new_with_uri(GET_HTML_PATH("weibo_test"));
 
     signal(SIGINT, catch_int);

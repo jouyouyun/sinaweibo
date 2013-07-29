@@ -149,8 +149,27 @@ class SinaUserLabel extends Widget
         @element.innerText = sinaHandle.sinaUserName
         $("#sina_button").appendChild(@element)
 
+OnMoveDown = =>
+    echo "Mouse Move"
+    bodyContainer.addEventListener('mouseup', OnMoveUp)
+    bodyContainer.addEventListener('mousemove', OnMoveMove)
+
+OnMoveUp = =>
+    echo "Mouse Up"
+    bodyContainer.removeEventListener('mousemove', OnMoveMove)
+    bodyContainer.removeEventListener('mouseup', OnMoveUp)
+
+OnMoveMove =(ev) =>
+    echo "Mouse Move"
+    ax = ev.screenX
+    ay = ev.screenY
+    echo "ax: " + ax
+    echo "ay: " + ay
+    DCore.WeiboTest.MoveWindow(ax.toString(), ay.toString())
+
 window.addEventListener('load', sinaHandle.SinaParseLoad, false)
 textArea.addEventListener('input', checkLength)
 sinaPicAuth.addEventListener('click', WeiboLogin)
 closeButton.addEventListener('click', WeiboExit)
 shareButton.addEventListener('click', WeiboPublish)
+bodyContainer.addEventListener('mousedown', OnMoveDown)

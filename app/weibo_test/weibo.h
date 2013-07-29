@@ -3,6 +3,7 @@
 
 #include <gtk/gtk.h>
 #include <glib.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
 
@@ -16,5 +17,6 @@ void weibotest_SaveToken(char *access_token);
 void weibotest_SaveMsg(char *msg);
 int weibotest_SinaUpload();
 void catch_int(int signo);
+void weibotest_MoveWindow(char *ax, char *ay);
 
 #endif
