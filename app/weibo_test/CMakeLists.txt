@@ -1,4 +1,4 @@
-SET(NAME "weibo_test")
+SET(NAME "weibo-test")
 
 GEN_JSC_SOURCE(JSC_GEN "jsc")
 
