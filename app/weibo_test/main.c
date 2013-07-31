@@ -10,6 +10,28 @@ int ny = 0;
 gboolean drag = FALSE;
 GtkWidget *container = NULL;
 
+void weibotest_MoveWindow(char *ax, char *ay)
+{
+    int cx = 0;
+    int cy = 0;
+    int x = 0, y = 0;
+
+    if ( ax == NULL || ay == NULL ) {
+        g_printerr("axy NULL\n");
+        return ;
+    }
+    //g_printerr("\naxy: %s\t%s\n", ax, ay);
+    cx = atoi(ax);
+    cy = atoi(ay);
+
+    gtk_window_get_position((GtkWindow*)container, &x, &y);
+    g_printerr("global nxy: x = %d\ty = %d\n", nx, ny);
+    g_printerr("position: x = %d\ty = %d\n", x, y);
+    g_printerr("event: x = %d\ty = %d\n", cx, cy);
+    g_printerr("location: x = %d\ty = %d\n", x + cx -nx, y + cy -ny);
+    gtk_window_move((GtkWindow*)container, x + cx -nx, y + cy -ny);
+}
+/*
 static gint button_press_event(GtkWidget *widget, 
         GdkEventButton *event, gpointer data)
 {
@@ -34,28 +56,6 @@ static gint button_release_event(GtkWidget *widget,
     return TRUE;
 }
 
-void weibotest_MoveWindow(char *ax, char *ay)
-{
-    int cx = 0;
-    int cy = 0;
-    int x = 0, y = 0;
-
-    if ( ax == NULL || ay == NULL ) {
-        g_printerr("axy NULL\n");
-        return ;
-    }
-    //g_printerr("\naxy: %s\t%s\n", ax, ay);
-    cx = atoi(ax);
-    cy = atoi(ay);
-
-    gtk_window_get_position((GtkWindow*)container, &x, &y);
-    g_printerr("global nxy: x = %d\ty = %d\n", nx, ny);
-    g_printerr("position: x = %d\ty = %d\n", x, y);
-    g_printerr("event: x = %d\ty = %d\n", cx, cy);
-    g_printerr("location: x = %d\ty = %d\n", x + cx -nx, y + cy -ny);
-    gtk_window_move((GtkWindow*)container, x + cx -nx, y + cy -ny);
-}
-
 static gint motion_notify_event(GtkWidget *widget, 
         GdkEventButton *event, gpointer data)
 {
@@ -71,7 +71,7 @@ static gint motion_notify_event(GtkWidget *widget,
 
     return TRUE;
 }
-
+*/
 int main(int argc, char **argv)
 {
     init_i18n();
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
     gtk_container_add(GTK_CONTAINER(container), GTK_WIDGET(webview));
 
     g_signal_connect(webview, "draw", G_CALLBACK(erase_background), NULL);
-    gtk_widget_set_events(container, 
+    /*gtk_widget_set_events(container, 
         GDK_EXPOSURE_MASK | GDK_LEAVE_NOTIFY_MASK |
         GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | 
         GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK );
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
     g_signal_connect(G_OBJECT(container), "button_release_event", 
             G_CALLBACK(button_release_event), container);
     g_signal_connect(G_OBJECT(container), "motion_notify_event", 
-            G_CALLBACK(motion_notify_event), container);
+            G_CALLBACK(motion_notify_event), container);*/
     //g_signal_connect(container, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     monitor_resource_file("weibo_test", webview);
 
