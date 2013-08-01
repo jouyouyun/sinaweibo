@@ -59,13 +59,13 @@ class SinaWeibo
         xhr = null
 
         echo response
-        if response.length == 117
+        jsonObj = JSON.parse(response)
+        @sinaAccessToken = jsonObj.access_token
+        if @sinaAccessToken
             has_auth = true
             sinaPicAuth.src = "../img/Sina.png"
-
-            jsonObj = JSON.parse(response)
-            @sinaAccessToken = jsonObj.access_token
-            
+            echo "update sina image"
+                
             echo "Token: " + @sinaAccessToken
             DCore.WeiboTest.SaveToken(@sinaAccessToken)
             @sinaUserName = @SinaGetUserName(@sinaAccessToken, @SinaGetUid())
@@ -73,6 +73,7 @@ class SinaWeibo
             sinaPicAuth.value = @sinaUserName
             return @sinaAccessToken
         else
+            echo "got Token error"
             return null
 
     SinaGetUid: ()->

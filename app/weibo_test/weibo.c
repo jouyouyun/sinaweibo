@@ -1,5 +1,6 @@
 #include "weibo.h"
 #include <stdlib.h>
+#include "jsextension.h"    //send signal to html
 
 void weibotest_exit()
 {
@@ -44,4 +45,32 @@ void catch_int(int signo)
     if ( signo == SIGINT ) {
         weibotest_exit();
     }
+}
+
+int weibotest_SinaUpload()
+{
+    gchar *curl_cmd = NULL;
+
+    if ( sina_access_token == NULL || sina_msg == NULL ) {
+        g_printerr("arguments error in SinaUpload...\n");
+        return -1;
+    }
+
+    curl_cmd = g_strdup_printf("curl -k -v -F \"pic=@%s\" -F 'access_token=%s' -F 'status=%s' \"https://upload.api.weibo.com/2/statuses/upload.json\"", IMG_PATH, sina_access_token, sina_msg);
+    if ( curl_cmd == NULL ) {
+        g_printerr("constructor curl cmd failed...\n");
+        return -1;
+    }
+    g_printerr("curl cmd : %s\n", curl_cmd);
+    system(curl_cmd);
+    g_free(curl_cmd);
+    curl_cmd = NULL;
+    g_free(sina_access_token);
+    sina_access_token = NULL;
+    g_free(sina_msg);
+    sina_msg = NULL;
+
+    js_post_message_simply("SinaUploadComplete", NULL);
+
+    return 0;
 }
