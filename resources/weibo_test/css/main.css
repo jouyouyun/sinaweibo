@@ -105,6 +105,7 @@ textarea {
 .number {
     color:#94a9c8;
     margin-right:10px;
+    margin-top: 3px;
     float:right;
     font-size:190%;
 }
@@ -115,18 +116,21 @@ textarea {
     width:94px;
     height:34px;
     float:right;
+    margin-top: 3px;
     background: url("../img/share_normal.png");
 }
 
 .button_share:hover {
     position:relative;
     float:right;
+    margin-top: 3px;
     background: url("../img/share_hover.png");
 }
 
 .button_share:active {
     position:relative;
     float:right;
+    margin-top: 3px;
     background: url("../img/share_press.png");
 }
 
