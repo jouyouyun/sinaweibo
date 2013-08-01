@@ -63,7 +63,8 @@ class SinaWeibo
         @sinaAccessToken = jsonObj.access_token
         if @sinaAccessToken
             has_auth = true
-            sinaPicAuth.src = "../img/Sina.png"
+            sinaPicAuth.src = "img/Sina.png"
+            sinaCheckBox.checked = true
             echo "update sina image"
                 
             echo "Token: " + @sinaAccessToken
@@ -117,7 +118,8 @@ class SinaWeibo
         if search == null
             return
         if hostdest == @hostName
-            @SinaGetToken()
+            if !has_auth
+                @SinaGetToken()
 
 sinaHandle = new SinaWeibo()
 
@@ -130,18 +132,12 @@ WeiboLogin = =>
         #sinaHandle.SinaGetToken()
 
 WeiboPublish = =>
+    #shareButton.style.backgroundImaged = "../img/share_press.png"
     if has_auth
-        if !sinaCheckBox.checked
-            alert("请选择需要发送的微博")
-            return
-        else if textArea.value.length < 1
-            alert("请输入发送内容")
-            return
-        else
-            DCore.WeiboTest.SaveMsg(textArea.value)
-            DCore.WeiboTest.SinaUpload()
-            textArea.value = ""
-            return
+        DCore.WeiboTest.SaveMsg(textArea.value)
+        DCore.WeiboTest.SinaUpload()
+        textArea.value = ""
+        return
 
 class SinaUserLabel extends Widget
     constructor: (@id)->
@@ -151,14 +147,25 @@ class SinaUserLabel extends Widget
         $("#sina_button").appendChild(@element)
 
 SinaUploadOver = =>
-    alert("Weibo Send Over")
     DCore.WeiboTest.exit()
 
+SinaTokenExist = ->
+    flag = DCore.WeiboTest.CheckToken()
+    echo "flag: " + flag
+    if !flag
+        return
+    
+    DCore.WeiboTest.SaveToken(flag)
+    has_auth = true
+    sinaPicAuth.src = "img/Sina.png"
+    sinaCheckBox.checked = true
+
+DCore.signal_connect("SinaUploadComplete", ->
+    SinaUploadOver())
+
+SinaTokenExist()
 window.addEventListener('load', sinaHandle.SinaParseLoad, false)
 textArea.addEventListener('input', checkLength)
 sinaPicAuth.addEventListener('click', WeiboLogin)
 closeButton.addEventListener('click', WeiboExit)
 shareButton.addEventListener('click', WeiboPublish)
-
-DCore.signal_connect("SinaUploadComplete", ->
-    SinaUploadOver())

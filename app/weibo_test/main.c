@@ -5,16 +5,14 @@
 #include "weibo.h"
 #include <gdk/gdkcursor.h>
 
+extern gchar *sina_access_token;
+extern gchar *sina_msg;
 GtkWidget *container = NULL;
 
 int main(int argc, char **argv)
 {
     init_i18n();
     gtk_init(&argc, &argv);
-
-    sina_access_token = NULL;
-    sina_msg = NULL;
-
     
     container = create_web_container(TRUE, TRUE);
     GtkWidget *webview = d_webview_new_with_uri(GET_HTML_PATH("weibo_test"));
@@ -36,6 +34,7 @@ int main(int argc, char **argv)
     //去除窗口修饰
     gtk_window_set_decorated(GTK_WINDOW (container), FALSE);
     gtk_widget_show_all(container);
+    sina_weibo_inface();
     gtk_main();
 
     return 0;
