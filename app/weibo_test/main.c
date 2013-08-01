@@ -3,32 +3,37 @@
 #include "utils.h"
 #include "i18n.h"
 #include "weibo.h"
+#include "jsextension.h"    //send signal to html
 #include <gdk/gdkcursor.h>
 
 GtkWidget *container = NULL;
 
-void weibotest_MoveWindow(char *ax, char *ay, char *rx, char *ry)
+int weibotest_SinaUpload()
 {
-    int x = 0, y = 0;
-    int cx = 0, cy = 0;    //鼠标在桌面的位置
-    int nx = 0, ny = 0; //鼠标在页面的位置
+    gchar *curl_cmd = NULL;
 
-    if ( ax == NULL || ay == NULL || rx == NULL || ry == NULL ) {
-        g_printerr("axy NULL\n");
-        return ;
+    if ( sina_access_token == NULL || sina_msg == NULL ) {
+        g_printerr("arguments error in SinaUpload...\n");
+        return -1;
     }
-    //g_printerr("\naxy: %s\t%s\n", ax, ay);
-    cx = atoi(ax);
-    cy = atoi(ay);
-    nx = atoi(rx);
-    ny = atoi(ry);
 
-    gtk_window_get_position((GtkWindow*)container, &x, &y);
-    g_printerr("position: x = %d\ty = %d\n", x, y);
-    g_printerr("event: x = %d\ty = %d\n", cx, cy);
-    g_printerr("nxy: x = %d\ty = %d\n", nx, ny);
-    g_printerr("location: x = %d\ty = %d\n", x + cx -nx, y + cy -ny);
-    gtk_window_move((GtkWindow*)container, x + cx -nx, y + cy -ny);
+    curl_cmd = g_strdup_printf("curl -k -v -F \"pic=@%s\" -F 'access_token=%s' -F 'status=%s' \"https://upload.api.weibo.com/2/statuses/upload.json\"", IMG_PATH, sina_access_token, sina_msg);
+    if ( curl_cmd == NULL ) {
+        g_printerr("constructor curl cmd failed...\n");
+        return -1;
+    }
+    g_printerr("curl cmd : %s\n", curl_cmd);
+    system(curl_cmd);
+    g_free(curl_cmd);
+    curl_cmd = NULL;
+    g_free(sina_access_token);
+    sina_access_token = NULL;
+    g_free(sina_msg);
+    sina_msg = NULL;
+
+    js_post_message_simply("SinaUploadComplete", NULL);
+
+    return 0;
 }
 
 int main(int argc, char **argv)
