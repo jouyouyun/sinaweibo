@@ -11,6 +11,7 @@ core
 resources/weibo_test/css/smoothness
 
 app/dominant_color
+cap_pic.png
 
 # CMake
 CMakeFiles/
