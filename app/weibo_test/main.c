@@ -35,7 +35,7 @@ int main(int argc, char **argv)
     gtk_window_set_decorated(GTK_WINDOW (container), FALSE);
     gtk_widget_show_all(container);
     sina_weibo_inface();
-    //gtk_main();
+    gtk_main();
 
     return 0;
 }

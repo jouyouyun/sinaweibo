@@ -7,7 +7,7 @@
 
 gchar *sina_access_token = NULL;
 gchar *sina_msg = NULL;
-GMainLoop *dbus_loop = NULL;
+//GMainLoop *dbus_loop = NULL;
 
 char *weibotest_CheckToken()
 {
@@ -60,8 +60,8 @@ void weibotest_exit()
         sina_msg = NULL;
     }
 
-    //gtk_main_quit();
-    g_main_loop_quit(dbus_loop);
+    gtk_main_quit();
+    //g_main_loop_quit(dbus_loop);
 
     return ;
 }
@@ -113,10 +113,6 @@ void weibotest_SaveMsg(char *msg)
 
 void catch_int(int signo)
 {
-    if ( dbus_loop != NULL ) {
-        g_main_loop_quit(dbus_loop);
-    }
-
     if ( signo == SIGINT ) {
         weibotest_exit();
     }
@@ -130,7 +126,7 @@ void weibotest_SinaUpload()
         g_printerr("arguments error in SinaUpload...\n");
         return ;
     }
-    if ( sina_msg[0] == '\0' ) {
+    if ( sina_msg == NULL || sina_msg[0] == '\0' ) {
         g_printerr("-------------msg NULL\n");
         sina_msg = g_strdup("LinuxDeepin");
     }
