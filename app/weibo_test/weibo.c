@@ -4,6 +4,7 @@
 
 #define BUFFER  512
 #define WEIBO_CONFIG    "/.config/speech_weibo.ini"
+#define WEIBO_NOTIFY    "/usr/bin/weibo_notify.py"
 
 gchar *sina_access_token = NULL;
 gchar *sina_msg = NULL;
@@ -150,6 +151,7 @@ void weibotest_SinaUpload()
     g_free(sina_msg);
     sina_msg = NULL;
 
+    system(WEIBO_NOTIFY);
     js_post_message_simply("SinaUploadComplete", NULL);
 
     return ;
