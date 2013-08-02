@@ -3,7 +3,7 @@ Deepin Speech Weibo
 
 Depends
 -------
-    apt-get build-dep deepin-desktop-environment curl
+    apt-get build-dep deepin-desktop-environment curl libopencv-dev
 
 
 How to build?
