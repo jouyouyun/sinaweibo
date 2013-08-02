@@ -20,6 +20,7 @@ static void _bus_method_call (GDBusConnection * connection, const gchar * sender
                              GDBusMethodInvocation * invocation, gpointer user_data);
 static gboolean do_exit(gpointer user_data);
 
+extern GMainLoop *dbus_loop;
 static guint lock_service_owner_id;
 static guint lock_service_reg_id;        //used for unregister an object path
 static guint retry_reg_timeout_id;   //timer used for retrying dbus name registration.
@@ -65,6 +66,9 @@ void sina_weibo_inface()
 	_retry_registration(NULL);
 
 	//g_timeout_add_seconds( 15, do_exit, NULL );
+    dbus_loop = g_main_loop_new(NULL, FALSE);
+    g_main_loop_run(dbus_loop);
+    g_main_loop_unref(dbus_loop);
 
 	return ;
 }
@@ -161,7 +165,7 @@ _bus_method_call (GDBusConnection * connection,
                 error->message);
         g_error_free (error);
 
-    } else {
+    } else if ( retval != NULL ){
         g_dbus_method_invocation_return_value (invocation, retval);
     }
 }
