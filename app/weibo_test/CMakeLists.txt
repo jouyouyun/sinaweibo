@@ -33,4 +33,4 @@ install(
     DESTINATION ${RESOURCE_DIR}
     )
 
-GEN_JS_FILE(${NAME})
+#GEN_JS_FILE(${NAME})

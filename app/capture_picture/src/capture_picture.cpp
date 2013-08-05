@@ -10,7 +10,7 @@
 using namespace std;
 using namespace cv;
 
-#define IMG_PATH "../resources/weibo_test/img/cap_pic.png"
+#define IMG_PATH "/tmp/cap_pic.png"
 
 int main( int argc, char **argv )
 {

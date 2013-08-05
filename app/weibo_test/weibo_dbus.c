@@ -40,18 +40,13 @@ const char *_lock_dbus_iface_xml =
 "	<interface name=\""DBUS_WEIBO_INFACE"\">\n"
 "		<method name=\"weibotest_SinaUpload\">\n"
 "		</method>"
-"		<method name=\"hello\">\n"
-"		</method>"
+"       <signal name=\"SpeechText\">\n"
+"        <arg name=\"text\" type=\"s\" direction=\"out\">\n"
+"        </arg>"
+"       </signal>"
 "	</interface>\n"
 "</node>\n"
 ;
-
-void hello()
-{
-	sys_says("Hello World!\n");
-
-	return;
-}
 
 void sina_weibo_inface()
 {
@@ -164,8 +159,6 @@ _bus_method_call (GDBusConnection * connection,
 
     if (g_strcmp0 (method, "weibotest_SinaUpload") == 0) {
         weibotest_SinaUpload();
-    } else if (g_strcmp0 (method, "hello") == 0) {
-        hello();
     } else {
         g_warning ("Calling method '%s' on lock and it's unknown", method);
     }

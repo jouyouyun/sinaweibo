@@ -163,7 +163,15 @@ SinaTokenExist = ->
 DCore.signal_connect("SinaUploadComplete", ->
     SinaUploadOver())
 
+SetTextFromSpeech = ->
+    try
+        @dbus = DCore.DBus.session("com.deepin.sina_weibo")
+        @dbus.connect("SpeechText", (s) =>
+            textArea.value = s
+        )
+
 SinaTokenExist()
+SetTextFromSpeech()
 window.addEventListener('load', sinaHandle.SinaParseLoad, false)
 textArea.addEventListener('input', checkLength)
 sinaPicAuth.addEventListener('click', WeiboLogin)

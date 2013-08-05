@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     set_desktop_env_name("Deepin");
 
     //Capture Picture
-    system("./capture-picture");
+    system("capture-picture");
 
     gtk_container_add(GTK_CONTAINER(container), GTK_WIDGET(webview));
 
